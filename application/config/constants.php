@@ -45,6 +45,12 @@ defined('CI_LOG') or define('CI_LOG', isset($_SERVER['CI_LOG']) ? $_SERVER['CI_L
 */
 defined('TIME_REFRENCE') or define('TIME_REFRENCE', isset($_SERVER['TIME_REFRENCE']) ? $_SERVER['TIME_REFRENCE'] : 'local');
 
+/*
+|--------------------------------------------------------------------------
+| Encryption Key
+|--------------------------------------------------------------------------
+*/
+defined('ENCRYPTION_KEY') or define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ? $_SERVER['ENCRYPTION_KEY'] : 'angeli');
 
 /*
 |--------------------------------------------------------------------------
