@@ -54,6 +54,13 @@ defined('ACTIVE_DATABASE_GROUP') or define('ACTIVE_DATABASE_GROUP', isset($_SERV
 
 /*
 |--------------------------------------------------------------------------
+| Eloquent Model Locations
+|--------------------------------------------------------------------------
+*/
+defined('ELOQUENT_MODEL_LOCATIONS') or define('ELOQUENT_MODEL_LOCATIONS', array(APPPATH.'eloquent_models'));
+
+/*
+|--------------------------------------------------------------------------
 | Log Threshold
 |--------------------------------------------------------------------------
 */
