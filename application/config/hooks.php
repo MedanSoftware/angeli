@@ -21,7 +21,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Only the benchmark and hooks class have been loaded at this point.
  * No routing or other processes have happened.
  */
-$hook['pre_system'] = NULL;
+$hook['pre_system'] = array(
+	array(
+		'class'    => 'Booting\Application',
+		'function' => 'themes',
+		'filename' => 'booting/Application.php',
+		'filepath' => 'hooks'
+	)
+);
 
 /**
  * -------------------------------------------------------------------------
