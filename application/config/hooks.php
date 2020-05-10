@@ -27,6 +27,26 @@ $hook['pre_system'] = array(
 		'function' => 'themes',
 		'filename' => 'booting/Application.php',
 		'filepath' => 'hooks'
+	),
+	array(
+		'class'    	=> 'Booting\Database',
+		'function' 	=> 'connection',
+		'filename' 	=> 'booting/Database.php',
+		'filepath' 	=> 'hooks',
+		'params'	=> ACTIVE_DATABASE_GROUP
+	),
+	array(
+		'class'    	=> 'Booting\Database',
+		'function' 	=> 'connection',
+		'filename' 	=> 'booting/Database.php',
+		'filepath' 	=> 'hooks',
+		'params'	=> 'system'
+	),
+	array(
+		'class'    	=> 'Booting\Database',
+		'function'	=> 'models',
+		'filename' 	=> 'booting/Database.php',
+		'filepath'	=> 'hooks'
 	)
 );
 
