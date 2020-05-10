@@ -73,6 +73,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+/*
+| -------------------------------------------------------------------
+| Database Group
+| -------------------------------------------------------------------
+*/
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
@@ -87,6 +92,34 @@ $db['default'] = array(
 	'cachedir' => '',
 	'char_set' => 'utf8',
 	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+/*
+| -------------------------------------------------------------------
+| Local Database System
+| -------------------------------------------------------------------
+| Do not change this configuration
+*/
+$db['system'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => '',
+	'password' => '',
+	'database' => APPPATH.'system.db',
+	'dbdriver' => 'sqlite3',
+	'dbprefix' => strtolower(str_replace(' ', '_', APP_INFO['name'].'_')),
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8mb4',
+	'dbcollat' => 'utf8mb4_unicode_ci',
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
