@@ -47,6 +47,13 @@ defined('THEMES_PATH') or define('THEMES_PATH', isset($_SERVER['THEMES_PATH']) ?
 
 /*
 |--------------------------------------------------------------------------
+| Active Database Group
+|--------------------------------------------------------------------------
+*/
+defined('ACTIVE_DATABASE_GROUP') or define('ACTIVE_DATABASE_GROUP', isset($_SERVER['ACTIVE_DATABASE_GROUP']) ? $_SERVER['ACTIVE_DATABASE_GROUP'] : 'default');
+
+/*
+|--------------------------------------------------------------------------
 | Log Threshold
 |--------------------------------------------------------------------------
 */
