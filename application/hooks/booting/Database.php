@@ -142,14 +142,17 @@ class Database
 	 */
 	public function models()
 	{
-		require_once(APPPATH.'core/Eloquent_Model.php');
-
-		foreach (ELOQUENT_MODEL_LOCATIONS as $location)
+		if (class_exists('\Illuminate\Database\Capsule\Manager'))
 		{
-			$this->require_eloquent_models($location);
-		}
+			require_once(APPPATH.'core/Eloquent_Model.php');
 
-		log_message('info','Load eloquent model');
+			foreach (ELOQUENT_MODEL_LOCATIONS as $location)
+			{
+				$this->require_eloquent_models($location);
+			}
+
+			log_message('info','Load eloquent model');
+		}
 	}
 
 	/**
