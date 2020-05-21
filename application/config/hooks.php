@@ -58,7 +58,15 @@ $hook['pre_system'] = array(
  * Called immediately prior to any of your controllers being called.
  * All base classes, routing, and security checks have been done.
  */
-$hook['pre_controller'] = NULL;
+$hook['pre_controller'] = array(
+	array(
+		'class'		=> 'Booting\Application',
+		'function'	=> 'language',
+		'filename'	=> 'booting/Application.php',
+		'filepath'	=> 'hooks',
+		'params'	=> array('display_message', 'form_field')
+	)
+);
 
 /**
  * -------------------------------------------------------------------------
