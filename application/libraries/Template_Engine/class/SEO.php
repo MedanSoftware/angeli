@@ -1,548 +1,203 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @package Codeigniter
- * @subpackage SEO
+ * @subpackage SEO 
  * @category Library
  * @author Agung Dirgantara <agungmasda29@gmail.com>
  * 
- * @link https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup Twitter Markup
- * @link https://developers.facebook.com/docs/sharing/webmasters/#markup Facebook Markup
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+ * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link
+ * @link https://dev.twitter.com/cards/overview
+ * @link https://developers.facebook.com/docs/sharing/webmasters
  */
 
 namespace CI\TemplateEngine;
 
 class SEO
 {
-	protected $meta_list;
-	protected $link_list;
+	protected $meta_tags = array();
+	protected $link_tags = array();
 
-	protected $meta_tag_template = "<meta {{attribute_key}}=\"{{attribute_value}}\" content=\"{{content}}\" {{other_attribute}}/>\n";
-	protected $link_tag_template = "<link rel=\"{{attribute_value}}\" {{content}} />\n";
+	protected $meta_tag_template = "<meta {{ attributes }} />\n";
+	protected $link_tag_template = "<link {{ attributes }} />\n";
 
 	/**
-	 * Meta Tag Generator
-	 * 
-	 * @param  string  $attribute_key   attribute key
-	 * @param  string  $attribute_value attribute value
-	 * @param  string  $content         content Value
-	 * @param  boolean $return          class
-	 * @return object
+	 * constructor
 	 */
-	public function meta_tag($attribute_key = null, $attribute_value = null, $content = null, $return = true)
+	public function __construct()
 	{
-		($this->validate_meta_attribute($attribute_key))?$this->run_validation($attribute_key,$attribute_value,$content):FALSE;
-		return ($return)?$this:FALSE;
+
 	}
 
 	/**
-	 * Meta Tag Render
-	 *
-	 * Render generated meta tag (return only meta tags)
-	 * @return string
-	 */
-	public function meta_tag_render()
-	{
-		$output 	= '';
-		$replace 	= ['{{attribute_key}}','{{attribute_value}}','{{content}}','{{other_attribute}}'];
-
-		if (!empty($this->meta_list) && is_array($this->meta_list))
-		{
-			foreach ($this->meta_list as  $value)
-			{
-				if (isset($value['error_message']))
-				{
-					$other_attribute = 'error_message="'.$value['error_message'].'"';
-				}
-				else
-				{
-					$other_attribute = '';
-				}
-
-				$output .= str_replace($replace, array($value['attribute_key'], $value['attribute_value'],$value['content'],$other_attribute), $this->meta_tag_template);
-			}
-		}
-
-		return $output;
-	}
-
-	/**
-	 * Link Tag Generator
-	 * 
-	 * @param  string  $attribute_value attribute value
-	 * @param  string  $content         attribute content
-	 * @param  boolean $return          class
-	 * @return object
-	 */
-	public function link_tag($attribute_value = null, $content = null, $return = true)
-	{
-		if ($attribute_value !== 'stylesheet')
-		{
-			$this->link_list[sha1($attribute_value)] = ['attribute_value' => $attribute_value,'content' => $content];
-		}
-		else
-		{
-			$this->link_list[sha1($content)] = ['attribute_value' => $attribute_value,'content' => $content];
-		}
-
-		return ($return)?$this:FALSE;
-	}
-
-	/**
-	 * Render Link Tag (return only link tags)
-	 * 
-	 * @return string
-	 */
-	public function link_tag_render()
-	{
-		$output = '';
-		$vars   = array('{{attribute_value}}','{{content}}');
-
-		foreach ($this->link_list as $key => $value)
-		{
-			$output .= str_replace($vars, array($value['attribute_value'], $value['content']), $this->link_tag_template);
-		}
-
-		return $output;
-	}
-
-	/**
-	 * Render Meta Tag & Link Tag
+	 * Render meta tag & link tag
 	 * 
 	 * @return string
 	 */
 	public function render()
 	{
+		$output = '';
+		$output .= $this->render_meta_tag();
+		$output .= $this->render_link_tag();
+		return $output;
+	}
+
+	/**
+	 * Render meta tag
+	 * 
+	 * @return string
+	 */
+	public function render_meta_tag()
+	{
 		$output 	= '';
-		$rmeta 		= ['{{attribute_key}}','{{attribute_value}}','{{content}}','{{other_attribute}}'];
-		$rlink 		= ['{{attribute_value}}','{{content}}'];
 
-		if (!empty($this->meta_list) && is_array($this->meta_list))
+		foreach ($this->meta_tags as  $meta_tag)
 		{
-			foreach ($this->meta_list as $value)
-			{
-				if (isset($value['error_message']))
-				{
-					$other_attribute = 'error_message="'.$value['error_message'].'"';
-				}
-				else
-				{
-					$other_attribute = '';
-				}
-
-				$output .= str_replace($rmeta,array($value['attribute_key'], $value['attribute_value'],$value['content'],$other_attribute), $this->meta_tag_template);
-			}
-		}
-
-		if (!empty($this->link_list) && is_array($this->link_list))
-		{
-			foreach ($this->link_list as $value)
-			{
-				$output .= str_replace($rlink, array($value['attribute_value'], $value['content']), $this->link_tag_template);
-			}
+			$output .= str_replace('{{ attributes }}',  implode(' ', $meta_tag), $this->meta_tag_template);
 		}
 
 		return $output;
 	}
 
 	/**
-	 * Forget Meta Tag or Link Tag
+	 * Render link tag
 	 * 
-	 * @param  string $tag (one of : meta or link)
-	 * @param  string $key key name
-	 * @return boolean
+	 * @return string
 	 */
-	public function forget($tag = null, $key = 'all')
+	public function render_link_tag()
 	{
-		if (in_array($tag, ['meta','link']))
+		$output 	= '';
+
+		foreach ($this->link_tags as  $link_tag)
 		{
-			if (isset($key))
-			{
-				if ($key == 'all')
-				{
-					unset($this->{$tag.'_list'});
+			$output .= str_replace('{{ attributes }}',  implode(' ', $link_tag), $this->link_tag_template);
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Add meta tag
+	 * 
+	 * @param array   $global_attributes
+	 * @param array   $additional_attributes
+	 * @param boolean | CI\TemplateEngine\SEO $return
+	 */
+	public function add_meta_tag(array $global_attributes, $additional_attributes = array(), $return = TRUE)
+	{
+		$tag_attributes = array();
+
+		foreach ($global_attributes as $global_attribute => $attribute_value) {
+			if (in_array($global_attribute, array('charset', 'content', 'http-equiv', 'name', 'itemprop'))) {
+
+				if ($global_attribute == 'charset') {
+					$available_value = array('UTF-8', 'ISO-8859-1');
+
+					if (in_array(strtoupper($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
+					}
 				}
-				else
-				{
-					unset($this->{$tag.'_list'}[sha1($key)]);
+
+				if (in_array($global_attribute, array('content', 'name'))) {
+					$available_attributes = array('http-equiv', 'name');
+
+					foreach (array_keys($global_attributes) as $value) {
+						if (in_array($value, $available_attributes)) {
+							array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
+						}	
+					}
+				}
+
+				if ($global_attribute == 'http-equiv') {
+					$available_value = array('content-security-policy', 'content-type', 'default-style', 'x-ua-compatible', 'refresh');
+
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
+					}
 				}
 			}
 		}
+
+		foreach ($additional_attributes as $additional_attribute => $attribute_value) {
+			array_push($tag_attributes, $additional_attribute.'="'.$attribute_value.'"');
+		}
+
+		$this->meta_tags[sha1(json_encode($tag_attributes))] = $tag_attributes;
+
+		return $return?$this:FALSE;
 	}
 
 	/**
-	 * Validation Meta Tag
+	 * Add link tag
 	 * 
-	 * @param  string $attribute_key   attribute key
-	 * @param  string $attribute_value attribute value
-	 * @param  string $content         content value
-	 * @return boolean
+	 * @param array   $global_attributes
+	 * @param array   $additional_attributes
+	 * @param boolean | CI\TemplateEngine\SEO $return
 	 */
-	private function run_validation($attribute_key = null, $attribute_value = null, $content = null)
+	public function add_link_tag(array $global_attributes, $additional_attributes = array(), $return = TRUE)
 	{
-		$explode = explode(':', $attribute_value);
+		$tag_attributes = array();
 
-		if (!empty($explode))
-		{
-			switch ($explode[0])
-			{
-				case 'og':
+		foreach ($global_attributes as $global_attribute => $attribute_value) {
+			if (in_array($global_attribute, array('as', 'crossorigin', 'disabled', 'href', 'hreflang', 'importance', 'integrity', 'media', 'referrerpolicy', 'rel', 'sizes', 'title', 'type', 'methods', 'prefetch', 'target'))) {
 
-					/**
-					 * og : site_name
-					 * og : title
-					 * og : description
-					 * og : url
-					 */
-					if (in_array($explode[1], ['site_name','title','description','url']))
-					{
-						$this->meta_list[sha1($attribute_key.$attribute_value)] =
-						['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
+				if ($global_attribute == 'as') {
+					$available_value = array('audio', 'document', 'embed', 'fetch', 'font', 'image', 'object', 'script', 'style', 'track', 'video', 'worker');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
+				}
 
-					/**
-					 * og : type
-					 */
-					elseif ($explode[1] == 'type')
-					{
-						if ($this->vog_type_attribute($content) === TRUE)
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							[
-								'attribute_key'		=> $attribute_key,
-								'attribute_value'	=> $attribute_value,
-								'content'			=> $content,
-								'error_message'		=> $this->vog_type_attribute($explode[1])
-							];
-						}
+				if ($global_attribute == 'crossorigin') {
+					$available_value = array('anonymous', 'use-credentials');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
+				}
 
-					/**
-					 * og : locale
-					 */
-					elseif ($explode[1] == 'locale')
-					{
-						if (isset($explode[2]))
-						{
-							if ($this->vog_locale_attribute($explode[2]) === TRUE)
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value)] 	=
-								['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-							}
-							else
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value)] =
-								[
-									'attribute_key'		=> $attribute_key,
-									'attribute_value'	=> $attribute_value,
-									'content'			=> $content,
-									'error_message'		=> $this->vog_locale_attribute($explode[2])
-								];
-							}
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
+				if ($global_attribute == 'importance') {
+					$available_value = array('auto', 'high', 'low');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
+				}
 
-					/*
-						og : image
-						og : image : secure_url
-						...
-					*/
-					elseif ($explode[1] == 'image')
-					{
-						if (isset($explode[2]))
-						{
-							if ($this->vog_image_attribute($explode[2]) === TRUE)
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-								['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-							}
-							else
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-								[
-									'attribute_key'		=> $attribute_key,
-									'attribute_value'	=> $attribute_value,
-									'content'			=> $content,
-									'error_message'		=> $this->vog_image_attribute($explode[2])
-								];
-							}
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
+				if ($global_attribute == 'media') {
+					$available_value = array('print', 'screen', 'aural', 'braille');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
+				}
 
-					/*
-						og : video
-					*/
-					elseif ($explode[1] == 'video')
-					{
-						if (isset($explode[2]))
-						{
-							if ($this->vog_video_attribute($explode[2]) === TRUE)
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-								['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-							}
-							else
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-								[
-									'attribute_key'		=> $attribute_key,
-									'attribute_value'	=> $attribute_value,
-									'content'			=> $content,
-									'error_message'		=> $this->vog_video_attribute($explode[2])
-								];
-							}
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
+				if ($global_attribute == 'referrerpolicy') {
+					$available_value = array('no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
-					else
-					{
-						$this->meta_list[sha1($attribute_key.$attribute_value)] =
-						['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
+				}
+
+				if ($global_attribute == 'type') {
+					$available_value = array('text/html', 'text/css');
+					if (in_array(strtolower($attribute_value), $available_value)) {
+						array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
 					}
+				}
 
-				break;
-
-				/*
-					place : location:latitude
-					place : location:longitude
-					place : ...
-				*/
-				case 'place':
-
-					if (isset($explode[1]) && $explode[1] == 'location')
-					{
-						if (in_array($explode[2], ['latitude','longitude']))
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] 	=
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							[
-								'attribute_key'		=> $attribute_key,
-								'attribute_value'	=> $attribute_value,
-								'content'			=> $content,
-								'error_message'		=> 'invalid location attribute'
-							];
-						}
-					}
-
-				break;
-
-				/*
-					profile : first_name
-					profile : last_name
-					profile : ...
-				*/
-				case 'profile':
-
-					if (isset($explode[1]))
-					{
-						if ($this->vog_profile_attribute($explode[1]) === TRUE)
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] 	=
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							[
-								'attribute_key'		=> $attribute_key,
-								'attribute_value'	=> $attribute_value,
-								'content'			=> $content,
-								'error_message'		=> $this->vog_profile_attribute($explode[1])
-							];
-						}
-					}
-					else
-					{
-						$this->meta_list[sha1($attribute_key.$attribute_value)] =
-						['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-					}
-
-				break;
-
-				/*
-					twitter : card
-					twitter : ...
-				*/
-				case 'twitter':
-
-					if (isset($explode[1]))
-					{
-						if ($this->vog_twitter_name($explode[1]) === TRUE)
-						{
-							if ($explode[1] == 'card')
-							{
-								if (in_array($content, ['summary','summary_large_image','app','player']))
-								{
-									$this->meta_list[sha1($attribute_key.$attribute_value)] 	=
-									['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-								}
-								else
-								{
-									$this->meta_list[sha1($attribute_key.$attribute_value)] =
-									[
-										'attribute_key'		=> $attribute_key,
-										'attribute_value'	=> $attribute_value,
-										'content'			=> $content,
-										'error_message'		=> 'invalid card content'
-									];
-								}
-							}
-							else
-							{
-								$this->meta_list[sha1($attribute_key.$attribute_value)] 	=
-								['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-							}
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							[
-								'attribute_key'		=> $attribute_key,
-								'attribute_value'	=> $attribute_value,
-								'content'			=> $content,
-								'error_message'		=> $this->vog_twitter_name($explode[1])
-							];
-						}
-					}
-
-				break;
-
-				/*
-					article : author
-					article : publisher
-					article : ...
-				*/
-				case 'article':
-
-					if (in_array($explode[1],['author','content_tier','expiration_time','modified_time','published_time','publisher','section','tag']))
-					{
-						if (in_array($explode[1], ['author','tag']))
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value.$content)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
-						else
-						{
-							$this->meta_list[sha1($attribute_key.$attribute_value)] =
-							['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-						}
-					}
-					else
-					{
-						$this->meta_list[sha1($attribute_key)] =
-						[
-							'attribute_key'		=> $attribute_key,
-							'attribute_value'	=> $attribute_value,
-							'content'			=> $content,
-							'error_message'		=> 'invalid article sub-attribute name'
-						];
-					}
-
-				break;
-
-				default:
-
-					$this->meta_list[sha1($attribute_key.$attribute_value)] =
-					['attribute_key' => $attribute_key,'attribute_value' => $attribute_value,'content' => $content];
-
-				break;
+				if (in_array($global_attribute, ['disabled', 'href', 'hreflang', 'integrity', 'rel', 'sizes', 'title', 'methods', 'prefetch', 'target'])) {
+					array_push($tag_attributes, $global_attribute.'="'.$attribute_value.'"');
+				}
 			}
 		}
-	}
 
-	/**
-	 * Validate Meta Attribute
-	 * 
-	 * @param  string $attribute_key attribute key
-	 * @return boolean
-	 */
-	private function validate_meta_attribute($attribute_key = null)
-	{
-		$valid_attributes =
-		[
-			'name',
-			'property',
-			'itemprop',
-			'http-equiv'
-		];
+		foreach ($additional_attributes as $additional_attribute => $attribute_value) {
+			array_push($tag_attributes, $additional_attribute.'="'.$attribute_value.'"');
+		}
 
-		return (!empty(trim($attribute_key)) && in_array($attribute_key, $valid_attributes))?TRUE:FALSE;
-	}
+		$this->link_tags[sha1(json_encode($tag_attributes))] = $tag_attributes;
 
-	/**
-	 * VOG prefix function is "Validation Open Graph"
-	 */
-
-	/* Open Graph Type */
-	private function vog_type_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['article','book','profile','website']))?TRUE:'invalid type attribute';
-	}
-
-	/* Open Graph Article */
-	private function vog_article_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['published_time','modified_time','expiration_time','author','section','tag']))?TRUE:'invalid article attribute';
-	}
-
-	/* Open Graph Book */
-	private function vog_book_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['author','isbn','release_date','tag']))?TRUE:'invalid book attribute';
-	}
-
-	/* Open Graph Locale */
-	private function vog_locale_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['alternate']))?TRUE:'invalid locale attribute';
-	}
-
-	/* Open Graph Profile */
-	private function vog_profile_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['first_name','last_name','username','gender']))?TRUE:'invalid profile attribute';
-	}
-
-	/* Open Graph Image */
-	private function vog_image_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['url','secure_url','type','width','height','alt']))?TRUE:'invalid image attribute';
-	}
-
-	/* Open Graph Video */
-	private function vog_video_attribute($attribute = null)
-	{
-		return (in_array($attribute, ['secure_url','type','width','height']))?TRUE:'invalid video attribute';
-	}
-
-	/* Twitter */
-	private function vog_twitter_name($attribute = null)
-	{
-		return (in_array($attribute, ['card','site','title','description','creator','domain']))?TRUE:'invalid twitter attribute';
+		return $return?$this:FALSE;
 	}
 }
 
 /* End of file SEO.php */
-/* Location : ./application/libraries/Template_Engine/class/SEO.php */
+/* Location : ./Template_Engine/libraries/Template_Engine/class/SEO.php */
