@@ -156,6 +156,17 @@ class Database
 	}
 
 	/**
+	 * Installation system database
+	 */
+	public function system()
+	{
+		$ci =& get_instance();
+		$ci->load->model('_installation/System_tables');
+		$ci->load->helper('database');
+		db_install_tables('model', '_installation/System_tables', 'system');
+	}
+
+	/**
 	 * Load file model
 	 * 
 	 * @param  string  $dir

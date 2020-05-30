@@ -65,6 +65,12 @@ $hook['pre_controller'] = array(
 		'filename'	=> 'booting/Application.php',
 		'filepath'	=> 'hooks',
 		'params'	=> array('display_message', 'form_field')
+	),
+	array(
+		'class'    	=> 'Booting\Database',
+		'function'	=> 'system',
+		'filename' 	=> 'booting/Database.php',
+		'filepath'	=> 'hooks'
 	)
 );
 
