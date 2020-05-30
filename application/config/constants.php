@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 defined('APP_INFO') or define('APP_INFO', array(
 	'name' => 'Angeli',
 	'version' => '1.0.0',
-	'ci_version' => CI_VERSION
+	'ci_version' => CI_VERSION,
+	'php_version' => PHP_VERSION
 ));
 
 if (isset($_SERVER['SERVER_PORT']))
