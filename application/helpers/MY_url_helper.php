@@ -47,7 +47,7 @@ function base_url($uri = '', $query_string = FALSE, $protocol = NULL)
  */
 function current_url($query_string = TRUE)
 {
-	return base_url(uri_string().config_item('url_suffix')).(filter_var($query_string, FILTER_VALIDATE_BOOLEAN)?get_http_build_query():FALSE);
+	return base_url(!empty(uri_string())?uri_string().config_item('url_suffix'):'').(filter_var($query_string, FILTER_VALIDATE_BOOLEAN)?get_http_build_query():FALSE);
 }
 
 if (!function_exists('api_url'))
