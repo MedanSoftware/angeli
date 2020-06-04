@@ -172,19 +172,7 @@ class Template_Engine extends CI_Driver_Library
 	{
 		if ($this->include_seo)
 		{
-			$seo = new \CI\TemplateEngine\SEO;
-
-			return $seo
-				->meta_tag('http-equiv','Pragma','no-cache')
-				->meta_tag('http-equiv','Cache-Control','no-cache')
-				->meta_tag('http-equiv','X-UA-Compatible','IE=edge')
-				->meta_tag('name','viewport','width=device-width, initial-scale=1.0')
-				->meta_tag('name','robots','index,follow')
-				->meta_tag('name','distribution','Global')
-				->meta_tag('name','rating','General')
-				->meta_tag('name','revisit-after','7 days')
-				->meta_tag('name','url',current_url())
-				->meta_tag('property','og:type','website');
+			return new \CI\TemplateEngine\SEO;
 		}
 	}
 
