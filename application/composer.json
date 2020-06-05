@@ -1,5 +1,6 @@
 {
 	"require": {
-		"illuminate/database": "^7.10"
+		"illuminate/database": "^7.10",
+		"hoa/acl": "^1.17"
 	}
 }
