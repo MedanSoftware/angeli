@@ -1,0 +1,37 @@
+{% extends 'base.twig' %}
+
+{% block begin_head %}
+	{{ 
+		themes.seo
+		.add_meta_tag({'http-equiv':'Content-Type', 'content':'text/html'}, {'charset':'utf-8'})
+		.add_meta_tag({'http-equiv':'Content-Type', 'content':'text/html'}, {'charset':'ISO-8859-1'})
+		.render
+	}}
+{% endblock %}
+
+{% block title %}Welcome to {{ constant('APP_INFO').name }}{% endblock %}
+
+{% block cease_head %}{% endblock %}
+
+{% block content %}
+<div id="container">
+	<h1>Welcome to {{ constant('APP_INFO').name }}!</h1>
+
+	<div id="body">
+		<p>The page you are looking at is being generated dynamically by {{ constant('APP_INFO').name }}.</p>
+
+		<p>If you would like to edit this page you'll find it located at:</p>
+		<code>application/themes/site/default/home.twig</code>
+
+		<p>The corresponding controller for this page is found at:</p>
+		<code>application/modules/site/controllers/Site.php</code>
+
+		<p>If you are exploring Codeigniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+	</div>
+
+	<p class="footer">
+		<span style="float:left;">Page rendered in <strong>{elapsed_time}</strong> seconds.</span> 
+		{{ constant('APP_INFO').name }} Version {{ constant('APP_INFO').version }} | Codeigniter Version {{ constant('CI_VERSION') }}
+	</p>
+</div>
+{% endblock %}

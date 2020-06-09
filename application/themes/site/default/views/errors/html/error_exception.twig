@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ constant('APP_INFO').name }} - Error Exception</title>
+</head>
+<body>
+	<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+	<h4>An uncaught Exception was encountered</h4>
+
+	<p>Type: {{ get_class(exception) }}</p>
+	<p>Message: {{ exception.getMessage() }}</p>
+	<p>Filename: {{ exception.getFile() }}</p>
+	<p>Line Number: {{ exception.getLine() }}</p>
+
+	{% if constant('SHOW_DEBUG_BACKTRACE') is defined and constant('SHOW_DEBUG_BACKTRACE') == TRUE %}
+		<p>Backtrace:</p>
+		<ul>
+			{% for error in exception.getTrace() %}
+				<li>
+					{% if error.file is defined %}
+
+						<p style="margin-left:10px">
+							File: {{ error.file }}<br>
+							Line: {{ error.line }}<br>
+							Function: {{ error.function }}
+						</p>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	</div>
+</body>
+</html>

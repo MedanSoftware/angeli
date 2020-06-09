@@ -1,0 +1,20 @@
+
+An uncaught Exception was encountered
+
+Type: {{ get_class(exception) | nl2br }}
+Message: {{ exception.getMessage() | nl2br }}
+Filename: {{ exception.getFile() | nl2br }}
+Line Number: {{ exception.getLine() | nl2br }}
+
+{% if constant('SHOW_DEBUG_BACKTRACE') is defined and constant('SHOW_DEBUG_BACKTRACE') == TRUE %}
+{{ 'Backtrace :' | nl2br }}
+
+{% for error in exception.getTrace() %}
+{% if error.file is defined %}
+	File: {{ error.file | nl2br}}
+	Line: {{ error.line | nl2br }}
+	Function: {{ error.function | nl2br }}
+	
+{% endif %}
+{% endfor %}
+{% endif %}

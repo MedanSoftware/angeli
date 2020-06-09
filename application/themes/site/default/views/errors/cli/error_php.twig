@@ -1,0 +1,20 @@
+
+A PHP Error was encountered
+
+Severity: {{ severity | nl2br }}
+Message: {{ message | nl2br }}
+Filename: {{ filepath | nl2br }}
+Line: {{ line | nl2br }}
+
+{% if constant('SHOW_DEBUG_BACKTRACE') is defined and constant('SHOW_DEBUG_BACKTRACE') == TRUE %}
+{{ 'Backtrace :' | nl2br }}
+
+{% for error in debug_backtrace() %}
+{% if error.file is defined %}
+	File: {{ error.file | nl2br}}
+	Line: {{ error.line | nl2br }}
+	Function: {{ error.function | nl2br }}
+
+{% endif %}
+{% endfor %}
+{% endif %}

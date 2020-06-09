@@ -1,0 +1,24 @@
+{
+	"slug" : "default",
+	"name" : "Angeli Site",
+	"version" : "1.0.0",
+	"description" : "Angeli starter site",
+	"preview_images" : [
+		"assets/preview_theme/images/screenshot1.jpg",
+		"assets/preview_theme/images/screenshot2.jpg",
+		"assets/preview_theme/images/screenshot3.jpg"
+	], 
+	"error_view_path" : "errors",
+	"authors" : [
+		{
+			"name" : "Agung Dirgantara",
+			"email" : "agungmasda29@gmail.com",
+			"website" : "https://www.medansoftware.com",
+			"social_media" : [
+				{"facebook" : "https://www.facebook.com/agoenks29D"},
+				{"twitter" : "https://www.twitter.com/agoenks29D"},
+				{"instagram" : "https://www.instagram.com/agoenks29D"}
+			]
+		}
+	]
+}
