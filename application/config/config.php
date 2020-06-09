@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = BASE_URL;
+$config['base_url'] = defined('BASE_URL')?BASE_URL:'';
 
 /*
 |--------------------------------------------------------------------------
@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = ENCRYPTION_KEY;
+$config['encryption_key'] = defined('ENCRYPTION_KEY')?ENCRYPTION_KEY:'';
 
 /*
 |--------------------------------------------------------------------------
@@ -488,7 +488,7 @@ $config['compress_output'] = FALSE;
 | helper' page of the user guide for information regarding date handling.
 |
 */
-$config['time_reference'] = TIME_REFRENCE;
+$config['time_reference'] = defined('TIME_REFRENCE')?TIME_REFRENCE:'local';
 
 /*
 |--------------------------------------------------------------------------

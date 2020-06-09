@@ -59,7 +59,9 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 $autoload['libraries'] = array(
-	'form_validation', 'session', 'user_agent'
+	'form_validation', 'session', 'user_agent',
+
+	'acl', 'template'
 );
 
 /*
@@ -92,7 +94,9 @@ $autoload['drivers'] = array('cache', 'template_engine');
 |	$autoload['helper'] = array('url', 'file');
 */
 $autoload['helper'] = array(
-	'cookie', 'date', 'directory', 'email', 'html', 'language', 'string', 'text', 'url'
+	'cookie', 'date', 'directory', 'email', 'html', 'language', 'string', 'text', 'url',
+
+	'database', 'validation', 'themes'
 );
 
 /*
