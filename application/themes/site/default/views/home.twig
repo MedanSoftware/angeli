@@ -28,10 +28,17 @@
 
 		<p>If you are exploring Codeigniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
-
+	<textarea id="ckeditor4" rows="10" cols="80">This is my textarea to be replaced with CKEditor 4.</textarea>
 	<p class="footer">
 		<span style="float:left;">Page rendered in <strong>{elapsed_time}</strong> seconds.</span> 
 		{{ constant('APP_INFO').name }} Version {{ constant('APP_INFO').version }} | Codeigniter Version {{ constant('CI_VERSION') }}
 	</p>
 </div>
+{% endblock %}
+
+{% block begin_footer %}
+	<script type="text/javascript" src="{{ base_url('assets/plugin/ckeditor4/ckeditor.js') }}"></script>
+	<script type="text/javascript">
+	CKEDITOR.replace('ckeditor4');
+	</script>
 {% endblock %}
