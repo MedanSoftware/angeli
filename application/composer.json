@@ -1,6 +1,7 @@
 {
 	"require": {
 		"illuminate/database": "^7.10",
-		"hoa/acl": "^1.17"
+		"hoa/acl": "^1.17",
+		"rakit/validation": "^1.2"
 	}
 }
