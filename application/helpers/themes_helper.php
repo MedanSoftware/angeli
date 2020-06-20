@@ -28,19 +28,24 @@ if (!function_exists('active_theme'))
 			{
 				if (db_has_table('setting', 'system'))
 				{
-					$system_setting = Angeli\Model\System\Setting::where(array(
-						'group' => 'themes',
-						'prefix' => 'active_theme_',
-						'name' => $module
-					));
-
-					if (!empty($system_setting->first()))
+					if (class_exists('Angeli\Model\System\Setting'))
 					{
-						if (array_search(trim($system_setting->first()->value), array_column($GLOBALS['modules_themes'][$module]['themes'], 'slug')) !== FALSE)
+						$system_setting = Angeli\Model\System\Setting::where(array(
+							'group' => 'themes',
+							'prefix' => 'active_theme_',
+							'name' => $module
+						));
+
+						if (!empty($system_setting->first()))
 						{
-							return trim($system_setting->first()->value);
+							if (array_search(trim($system_setting->first()->value), array_column($GLOBALS['modules_themes'][$module]['themes'], 'slug')) !== FALSE)
+							{
+								return trim($system_setting->first()->value);
+							}
 						}
 					}
+
+					return $default_theme;
 				}
 			}
 		}
