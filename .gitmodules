@@ -1,7 +1,3 @@
-[submodule "api"]
-	path = api
-	url = https://github.com/MedanSoftware/angeli-api.git
-
 [submodule "DevIcon"]
 	path = assets/font/icon/devicon
 	url = https://github.com/konpa/devicon.git

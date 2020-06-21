@@ -7,8 +7,10 @@ application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
+application/*.db
 
 composer.lock
+application/vendor/
 
 
 ## Sublime Text cache files
@@ -19,3 +21,7 @@ composer.lock
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+package-lock.json
+yarn.lock
+developer/
