@@ -21,3 +21,6 @@
 [submodule "CKEditor4"]
 	path = assets/plugin/ckeditor4
 	url = https://github.com/ckeditor/ckeditor4.git
+[submodule "api"]
+	path = api
+	url = https://github.com/MedanSoftware/angeli-api.git
