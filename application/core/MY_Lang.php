@@ -13,13 +13,26 @@ class MY_Lang extends MX_Lang
 	 * 
 	 * @var string
 	 */
-	public $base_language = 'english';
+	public $base_language;
 
-	public $current_language = 'english';
+	public $current_language;
 
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->base_language = config_item('language');
+		$this->current_language = array_key_exists('language', $_COOKIE)?$_COOKIE['language']:$this->base_language;
+	}
+
+	/**
+	 * Get base language
+	 * 
+	 * @return string
+	 */
+	public function get_base_language()
+	{
+		return $this->base_language;
 	}
 
 	/**
@@ -172,8 +185,10 @@ class MY_Lang extends MX_Lang
 					}
 				}
 			}
-
-			log_message('error', 'Unable to load the requested language file: language/' . $idiom . '/' . $langfile);
+			else
+			{
+				log_message('error', 'Unable to load the requested language file: language/' . $idiom . '/' . $langfile);
+			}
 		}
 
 		if (!isset($lang) OR ! is_array($lang))
