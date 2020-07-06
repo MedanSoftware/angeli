@@ -25,3 +25,20 @@ Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer
 ## Documentation
 
 I will write the documentation later :) or you can start contribute to this project
+
+## Basic Installation
+
+```bash
+bash:~$ git clone https://github.com/MedanSoftware/angeli.git --recurse-submodules
+bash:~$ composer install -d angeli/application/
+bash:~$ composer install -d angeli/api/application/
+```
+
+
+## Installation with RESTful-API
+
+```bash
+bash:~$ git clone https://github.com/MedanSoftware/angeli.git --recurse-submodules
+bash:~$ composer install -d angeli/application/
+bash:~$ composer install -d angeli/api/application/
+```
