@@ -1,6 +1,0 @@
-{
-	"require": {
-		"twig/twig": "^2.12",
-		"illuminate/view": "^6.3"
-	}
-}
