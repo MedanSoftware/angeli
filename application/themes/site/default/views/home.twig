@@ -9,14 +9,13 @@
 	}}
 {% endblock %}
 
-{% block title %}Welcome to {{ constant('APP_INFO').name }}{% endblock %}
+{% block title %}{{ lang('welcome_to_angeli') }}{% endblock %}
 
 {% block cease_head %}{% endblock %}
 
 {% block content %}
 <div id="container">
-	<h1>Welcome to {{ constant('APP_INFO').name }}!</h1>
-
+	<h1>{{ lang('welcome_to_angeli') }}!</h1>
 	<div id="body">
 		<p>The page you are looking at is being generated dynamically by {{ constant('APP_INFO').name }}.</p>
 
