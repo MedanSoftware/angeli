@@ -6,7 +6,7 @@
  * @author Agung Dirgantara <agungmasda29@gmail.com>
  */
 
-require_once (APPPATH.'libraries/Template_Engine/class/Twig.php');
+require_once (APPPATH.'libraries/Template_engine/class/Twig.php');
 
 class MY_Exceptions extends CI_Exceptions
 {
