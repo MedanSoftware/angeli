@@ -66,12 +66,14 @@ if (!function_exists('activate_theme'))
 	 */
 	function activate_theme($module = NULL, $theme = NULL)
 	{
-		if (array_key_exists($module, $GLOBALS['modules_themes']))
+		$module_name = preg_grep('/'.$module.'(\/|\\/)?\S/', array_keys($GLOBALS['modules_themes']));
+
+		if ($module_name)
 		{
 			if (db_has_table('setting', 'system'))
 			{
 				// check theme is exists
-				if (array_search($theme, array_column($GLOBALS['modules_themes'][$module]['themes'], 'slug')) !== FALSE)
+				if (array_search($theme, array_column($GLOBALS['modules_themes'][array_values($module_name)[0]]['themes'], 'slug')) !== FALSE)
 				{
 					$system_setting = new Angeli\Model\System\Setting;
 					$system_setting->group = 'themes';
@@ -86,6 +88,37 @@ if (!function_exists('activate_theme'))
 		}
 
 		return FALSE;
+	}
+}
+
+/**
+ * Site attribute
+ */
+if (!function_exists('site_attribute'))
+{
+	function site_attribute($key = NULL, $default_value = NULL, $force_update = FALSE)
+	{
+		$setting = Angeli\Model\Setting::where('name', $key)->first();
+
+		if (!empty($setting))
+		{
+			if ($force_update === TRUE)
+			{
+				$setting->value = $default_value;
+				$setting->save();
+			}
+
+			return $setting->value;
+		}
+		else
+		{
+			$setting = new Angeli\Model\Setting;
+			$setting->name = $key;
+			$setting->value = $default_value;
+			$setting->save();
+
+			return $default_value;
+		}
 	}
 }
 
