@@ -43,7 +43,7 @@
 	},
 	"manager": {
 		"defaultViewMode": "grid",
-		"dblClickOpen": false,
+		"dblClickOpen": true,
 		"selection": {
 			"enabled": true,
 			"useCtrlKey": true
@@ -55,7 +55,7 @@
 	},
 	"api": {
 		"lang": "php",
-		"connectorUrl": false,
+		"connectorUrl": "../../api/filemanager",
 		"requestParams": {
 			"GET": {},
 			"POST": {},
