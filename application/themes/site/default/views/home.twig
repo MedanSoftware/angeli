@@ -38,6 +38,9 @@
 {% block begin_footer %}
 	<script type="text/javascript" src="{{ base_url('assets/plugin/ckeditor4/ckeditor.js') }}"></script>
 	<script type="text/javascript">
-	CKEDITOR.replace('ckeditor4');
+	var module_link = '{{ module_link() }}';
+	CKEDITOR.replace('ckeditor4', {
+		filebrowserBrowseUrl:module_link+'site/filemanager?config=angeli.json'
+	});
 	</script>
 {% endblock %}

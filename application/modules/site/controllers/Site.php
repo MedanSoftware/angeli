@@ -20,6 +20,11 @@ class Site extends MX_Controller
 	{
 		$this->template->site('home');
 	}
+
+	public function filemanager()
+	{
+		$this->template->site('filemanager');
+	}
 }
 
 /* End of file Site.php */
