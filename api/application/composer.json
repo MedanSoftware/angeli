@@ -1,0 +1,6 @@
+{
+    "require": {
+        "medansoftware/codeigniter-hmvc-restserver": "^1.0",
+        "servocoder/richfilemanager-php": "^1.2"
+    }
+}
