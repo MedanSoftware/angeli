@@ -22,23 +22,16 @@ Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer
 **Multi Languages**
 - You can make some website with multi languages and saved in json file
 
+**File Manager**
+- This has file manager using [RichFilemanager](https://github.com/psolom/RichFilemanager)
+
 ## Documentation
 
 I will write the documentation later :) or you can start contribute to this project
 
-## Basic Installation
-
+## Installation
 ```bash
-bash:~$ git clone https://github.com/MedanSoftware/angeli.git --recurse-submodules
-bash:~$ composer install -d angeli/application/
-bash:~$ composer install -d angeli/api/application/
-```
-
-
-## Installation with RESTful-API
-
-```bash
-bash:~$ git clone https://github.com/MedanSoftware/angeli.git --recurse-submodules
+bash:~$ git clone https://github.com/MedanSoftware/angeli.git
 bash:~$ composer install -d angeli/application/
 bash:~$ composer install -d angeli/api/application/
 ```
