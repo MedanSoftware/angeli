@@ -9,27 +9,27 @@
 	}}
 {% endblock %}
 
-{% block title %}{{ lang('welcome_to_angeli') }}{% endblock %}
+{% block title %}{{ lang('welcome_to') ~ ' ' ~ constant('APP_INFO').name }}{% endblock %}
 
 {% block cease_head %}{% endblock %}
 
 {% block content %}
 <div id="container">
-	<h1>{{ lang('welcome_to_angeli') }}!</h1>
+	<h1>{{ lang('welcome_to') ~ ' ' ~ constant('APP_INFO').name }}!</h1>
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by {{ constant('APP_INFO').name }}.</p>
+		<p>{{ lang('welcome_message_1') }} {{ constant('APP_INFO').name }}.</p>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
+		<p>{{ lang('welcome_message_2') }}</p>
 		<code>application/themes/site/default/home.twig</code>
 
-		<p>The corresponding controller for this page is found at:</p>
+		<p>{{ lang('welcome_message_3') }}</p>
 		<code>application/modules/site/controllers/Site.php</code>
 
-		<p>If you are exploring Codeigniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+		<p>{{ lang('welcome_message_4') }} <a href="user_guide/">{{ lang('user_guide') }}</a>.</p>
 	</div>
-	<textarea id="ckeditor4" rows="10" cols="80">This is my textarea to be replaced with CKEditor 4.</textarea>
+	<textarea id="ckeditor4" rows="10" cols="80">{{ lang('ckeditor_content_text') }}</textarea>
 	<p class="footer">
-		<span style="float:left;">Page rendered in <strong>{elapsed_time}</strong> seconds.</span> 
+		<span style="float:left;">{{ lang('page_rendered_in') }} <strong>{elapsed_time}</strong> {{ lang('seconds') }}.</span> 
 		{{ constant('APP_INFO').name }} Version {{ constant('APP_INFO').version }} | Codeigniter Version {{ constant('CI_VERSION') }}
 	</p>
 </div>

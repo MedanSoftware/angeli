@@ -1,3 +1,11 @@
 {
-	"welcome_to_angeli":"Selamat Datang di Angeli"
+	"welcome_to" : "Selamat datang di",
+	"welcome_message_1" : "Halaman yang Anda lihat sedang dibuat secara dinamis oleh",
+	"welcome_message_2" : "Jika Anda ingin mengedit halaman ini, Anda akan menemukannya di:",
+	"welcome_message_3" : "Pengontrol yang sesuai untuk halaman ini ditemukan di",
+	"welcome_message_4" : "Jika Anda menjelajahi Codeigniter untuk pertama kalinya, Anda harus mulai dengan membaca",
+	"user_guide" : "Panduan Pengguna",
+	"ckeditor_content_text" : "Ini adalah teks area saya untuk diganti dengan CKEditor 4.",
+	"page_rendered_in" : "Laman yang dirender dalam",
+	"seconds" : "detik"
 }

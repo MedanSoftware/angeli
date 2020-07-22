@@ -1,3 +1,11 @@
 {
-	"welcome_to_angeli":"Welcome to Angeli"
+	"welcome_to" : "Welcome to",
+	"welcome_message_1" : "The page you are looking at is being generated dynamically by",
+	"welcome_message_2" : "If you would like to edit this page you'll find it located at:",
+	"welcome_message_3" : "The corresponding controller for this page is found at",
+	"welcome_message_4" : "If you are exploring Codeigniter for the very first time, you should start by reading the",
+	"user_guide" : "User Guide",
+	"ckeditor_content_text" : "This is my textarea to be replaced with CKEditor 4.",
+	"page_rendered_in" : "Page rendered in",
+	"seconds" : "seconds"
 }
