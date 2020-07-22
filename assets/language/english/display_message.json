@@ -6,6 +6,7 @@
 	"welcome_message_4" : "If you are exploring Codeigniter for the very first time, you should start by reading the",
 	"user_guide" : "User Guide",
 	"ckeditor_content_text" : "This is my textarea to be replaced with CKEditor 4.",
+	"integrated_with" : "integrated with",
 	"page_rendered_in" : "Page rendered in",
 	"seconds" : "seconds"
 }

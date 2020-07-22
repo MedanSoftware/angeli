@@ -17,6 +17,7 @@
 <div id="container">
 	<h1>{{ lang('welcome_to') ~ ' ' ~ constant('APP_INFO').name }}!</h1>
 	<div id="body">
+		<p>Change language : <a href="{{ current_url(false) }}?language=english">English</a> | <a href="{{ current_url(false) }}?language=indonesian">Indonesian</a></p>
 		<p>{{ lang('welcome_message_1') }} {{ constant('APP_INFO').name }}.</p>
 
 		<p>{{ lang('welcome_message_2') }}</p>
@@ -27,6 +28,7 @@
 
 		<p>{{ lang('welcome_message_4') }} <a href="user_guide/">{{ lang('user_guide') }}</a>.</p>
 	</div>
+	<h4><a href="https://github.com/ckeditor/ckeditor4">CKEditor</a> {{ lang('integrated_with') }} <a href="https://github.com/psolom/RichFilemanager">Richfilemanager</a></h4>
 	<textarea id="ckeditor4" rows="10" cols="80">{{ lang('ckeditor_content_text') }}</textarea>
 	<p class="footer">
 		<span style="float:left;">{{ lang('page_rendered_in') }} <strong>{elapsed_time}</strong> {{ lang('seconds') }}.</span> 
