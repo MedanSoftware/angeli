@@ -223,7 +223,7 @@ class MY_Lang extends MX_Lang
 	public function available_languages()
 	{
 		return array_values(array_filter(array_map(function($language){
-			return stripslashes($language);
+			return rtrim(stripslashes($language), '/');
 		}, array_keys(directory_map(APPPATH.'language')))));
 	}	
 }
