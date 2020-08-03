@@ -5,7 +5,7 @@ Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer
 ## Feature
 
 **HMVC** 
-- Angeli already using a HMVC module from 
+- Angeli already using a HMVC module from [wiredesignz/codeigniter-modular-extensions-hmvc](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/src)
 
 **Eloquent ORM**
 - You can use Eloquent in angeli project
@@ -17,7 +17,7 @@ Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer
 - You can use or start development some template like a wordpress site
 
 **RESTful-API**
-- Angeli have a RESTful API module
+- Angeli have a RESTful API module, library from [chriskacerguis/codeigniter-restserver](https://github.com/chriskacerguis/codeigniter-restserver)
 
 **Multi Languages**
 - You can make some website with multi languages and saved in json file
