@@ -36,8 +36,7 @@ bash:~$ composer install -d angeli/application/
 bash:~$ composer install -d angeli/api/application/
 ```
 
-
-## Example for Angeli Eloquent Model
+## Example of Angeli Eloquent Model
 
 ```php
 namespace Angeli\Model;
@@ -48,16 +47,16 @@ class User extends Eloquent_Model
 
 	public $timestamps	= TRUE;
 
-	protected $table 		= 'user';
-	protected $guarded		= array();
-	protected $hidden 		= array();
-	protected $fillable 	= array();
-	protected $connection 	= ACTIVE_DATABASE_GROUP;
+	protected $table	= 'user';
+	protected $guarded	= array();
+	protected $hidden	= array();
+	protected $fillable	= array();
+	protected $connection	= ACTIVE_DATABASE_GROUP;
 }
 
 ```
 
-## Example for Angeli Codeigniter Model
+## Example of Angeli Codeigniter Model
 
 ```php
 namespace Angeli;
