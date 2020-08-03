@@ -20,7 +20,7 @@ class MY_Security extends CI_Security
 	 */
 	public function set_password($string)
 	{
-		return md5($string);
+		return sha1($string);
 	}
 
 	/**
