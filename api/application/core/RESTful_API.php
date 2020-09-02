@@ -41,7 +41,6 @@ class RESTful_API extends RestController
 	 * Set header
 	 * 
 	 * @param  mixed $header
-	 * 
 	 * @return RESTful_API
 	 */
 	protected function set_header($header = RESTful_API::HTTP_OK)
