@@ -66,23 +66,37 @@ if (!function_exists('activate_theme'))
 	 */
 	function activate_theme($module = NULL, $theme = NULL)
 	{
-		$module_name = preg_grep('/'.$module.'(\/|\\/)?\S/', array_keys($GLOBALS['modules_themes']));
-
-		if ($module_name)
+		if (array_key_exists($module, $GLOBALS['modules_themes']))
 		{
 			if (db_has_table('setting', 'system'))
 			{
 				// check theme is exists
-				if (array_search($theme, array_column($GLOBALS['modules_themes'][array_values($module_name)[0]]['themes'], 'slug')) !== FALSE)
+				if (array_search($theme, array_column($GLOBALS['modules_themes'][$module]['themes'], 'slug')) !== FALSE)
 				{
 					$system_setting = new Angeli\Model\System\Setting;
-					$system_setting->group = 'themes';
-					$system_setting->prefix = 'active_theme_';
-					$system_setting->name = $module;
-					$system_setting->value = $theme;
-					$system_setting->save();
 
-					return TRUE;
+					$find_module_theme = $system_setting->where(array('group' => 'themes', 'prefix' => 'active_theme_', 'name' => $module))->first();
+
+					if (!empty($find_module_theme))
+					{
+						$find_module_theme->group = 'themes';
+						$find_module_theme->prefix = 'active_theme_';
+						$find_module_theme->name = $module;
+						$find_module_theme->value = $theme;
+						$find_module_theme->save();
+
+						return TRUE;
+					}
+					else
+					{
+						$system_setting->group = 'themes';
+						$system_setting->prefix = 'active_theme_';
+						$system_setting->name = $module;
+						$system_setting->value = $theme;
+						$system_setting->save();
+
+						return TRUE;
+					}
 				}
 			}
 		}
