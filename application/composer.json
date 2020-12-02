@@ -2,6 +2,7 @@
 	"require": {
 		"illuminate/database": "^7.10",
 		"hoa/acl": "^1.17",
-		"rakit/validation": "^1.2"
+		"rakit/validation": "^1.2",
+		"php-curl-class/php-curl-class": "^8.9"
 	}
 }

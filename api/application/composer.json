@@ -1,7 +1,6 @@
 {
     "require": {
         "servocoder/richfilemanager-php": "^1.2",
-        "php-curl-class/php-curl-class": "^8.8",
         "medansoftware/codeigniter-hmvc-restserver": "dev-master"
     }
 }
