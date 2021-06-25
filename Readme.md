@@ -1,6 +1,6 @@
 # Angeli
 
-Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer to Create Any Flexible Web Application with Best Performance and Perfect SEO.
+Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer to Create Any Flexible and Complex Web Application with Best Performance and Perfect SEO.
 
 ## Installation
 
@@ -19,6 +19,13 @@ bash:~$ composer install -d angeli/api/application/
 
 for the preview page, you can look at the http://{{ app_url }}/user
 ```
+
+### Filemanager Setup
+
+> Config file : assets/plugins/RichFilemanager/config/angeli.json
+
+Change the `connectorUrl` to {{base_url}}/api/filemanager
+
 
 ### Sample of Eloquent Model Class
 
