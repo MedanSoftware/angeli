@@ -20,7 +20,7 @@ bash:~$ composer install -d angeli/api/application/
 for the preview page, you can look at the http://{{ app_url }}/user
 ```
 
-### Create Eloquent Model
+### Sample of Eloquent Model Class
 
 ```php
 namespace Angeli\Model;
@@ -40,7 +40,7 @@ class User extends Eloquent_Model
 
 ```
 
-### Create Codeigniter Model
+### Sample of Codeigniter Model Class
 
 ```php
 namespace Angeli;
