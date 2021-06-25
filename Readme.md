@@ -2,41 +2,25 @@
 
 Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer to Create Any Flexible Web Application with Best Performance and Perfect SEO.
 
-## Feature
-
-**HMVC** 
-- Angeli already using a HMVC module from [wiredesignz/codeigniter-modular-extensions-hmvc](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/src)
-
-**Eloquent ORM**
-- You can use Eloquent in angeli project
-
-**Template Engine**
-- Angeli already using template engine [Twig](https://twig.symfony.com) & [Blade](https://laravel.com/docs/7.x/blade)
-
-**Dynamic Template**
-- You can use or start development some template like a wordpress site
-
-**RESTful-API**
-- Angeli have a RESTful API module, library from [chriskacerguis/codeigniter-restserver](https://github.com/chriskacerguis/codeigniter-restserver)
-
-**Multi Languages**
-- You can make some website with multi languages and saved in json file
-
-**File Manager**
-- This has file manager using [RichFilemanager](https://github.com/psolom/RichFilemanager)
-
-## Documentation
-
-I will write the documentation later :) or you can start contribute to this project
-
 ## Installation
+
+### Install required packages
+
 ```bash
 bash:~$ git clone https://github.com/MedanSoftware/angeli.git
 bash:~$ composer install -d angeli/application/
 bash:~$ composer install -d angeli/api/application/
 ```
 
-## Example of Angeli Eloquent Model
+### Activation User Module Theme
+
+```text
+{{base_url}}api/themes/activate/user/adminLTE-2
+
+for the preview page, you can look at the http://{{ app_url }}/user
+```
+
+### Create Eloquent Model
 
 ```php
 namespace Angeli\Model;
@@ -56,7 +40,7 @@ class User extends Eloquent_Model
 
 ```
 
-## Example of Angeli Codeigniter Model
+### Create Codeigniter Model
 
 ```php
 namespace Angeli;
@@ -88,7 +72,7 @@ class User extends MY_Model
 /* Location : ./application/models/User.php */
 ```
 
-## Controllers (HMVC)
+### Create HMVC Controller
 
 ```php
 class Site extends MX_Controller
@@ -123,7 +107,7 @@ class Site extends MX_Controller
 /* Location : ./site/controllers/Site.php */
 ```
 
-## RESTful-API
+### Create RESTful-API Controller
 
 ```php
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -161,7 +145,7 @@ class User extends RESTful_API
 	{
 		$this->load->model('user'); // Load user model in APPPATH.models/
 		$auth = $this->user->auth($this->post('username'), $this->post('password')); // Call model method
-		$this->set_header(RESTful_API::HTTP_OK)->send_response('success', $this->post(), $auth->toSql());
+		$this->set_header(RESTful_API::HTTP_OK)->send_response('success', $this->post(), $auth->toSql()); // for the output display, let's seet at the RESTful-API Output Sample
 	}
 
 	/**
@@ -177,7 +161,7 @@ class User extends RESTful_API
 }
 ```
 
-## RESTful-API Output
+### RESTful-API Output Sample
 
 ```json
 {
@@ -189,3 +173,29 @@ class User extends RESTful_API
     "message": "select * from `user` where (`username` = ? or `email` = ?) and `password` = ? and `user`.`deleted_at` is null"
 }
 ```
+
+## Feature
+
+**HMVC** 
+- Angeli already using a HMVC module from [wiredesignz/codeigniter-modular-extensions-hmvc](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/src)
+
+**Eloquent ORM**
+- You can use Eloquent in angeli project
+
+**Template Engine**
+- Angeli already using template engine [Twig](https://twig.symfony.com) & [Blade](https://laravel.com/docs/7.x/blade)
+
+**Dynamic Template**
+- You can use or start development some template like a wordpress site
+
+**RESTful-API**
+- Angeli have a RESTful API module, library from [chriskacerguis/codeigniter-restserver](https://github.com/chriskacerguis/codeigniter-restserver)
+
+**Multi Languages**
+- You can make some website with multi languages and saved in json file
+
+**File Manager**
+- This has file manager using [RichFilemanager](https://github.com/psolom/RichFilemanager)
+
+**DataTable Plugin**
+- Display tables with [DataTables](https://datatables.net)
