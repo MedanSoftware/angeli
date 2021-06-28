@@ -18,7 +18,7 @@ if (!function_exists('valid_json'))
 	{
 		json_decode($json);
 		return (json_last_error() == JSON_ERROR_NONE);
-	}	
+	}
 }
 /* End of file validation_helper.php */
 /* Location : ./application/helpers/validation_helper.php */
