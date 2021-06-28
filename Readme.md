@@ -11,7 +11,15 @@ bash:~$ git clone https://github.com/MedanSoftware/angeli.git
 bash:~$ composer install -d angeli/application/
 bash:~$ composer install -d angeli/api/application/
 ```
+### Environment Change
 
+> /api/.htaccess
+
+> /.htaccess
+
+```text
+SetEnv CI_ENV development
+```
 ### Activation User Module Theme
 
 ```text
