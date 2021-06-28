@@ -34,11 +34,14 @@ class MY_Exceptions extends CI_Exceptions
 
 			$ci->load->library('template');
 
+			$ci->lang->load(['display_message'], $ci->lang->current_language);
+
 			if (!empty($ci->router->fetch_module()))
 			{
 				$module = (!empty($ci->router->fetch_module()))?$ci->router->fetch_module():$ci->router->default_controller;
 				$data['themes']['url'] = base_url(backslash_to_slash(str_replace(APPPATH, '', THEMES_PATH).'/'.$module.'/'.active_theme($module)));
 				$data['themes']['assets_url'] = isset($_SERVER['ASSETS_URL'])?isset($_SERVER['ASSETS_URL']):base_url(backslash_to_slash(str_replace(FCPATH, '', ASSETS_PATH)));
+
 			}
 			else
 			{
