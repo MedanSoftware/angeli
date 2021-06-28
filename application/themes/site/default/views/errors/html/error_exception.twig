@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>{{ constant('APP_INFO').name }} | {{ lang('500_error_heading') }} </title>
-</head>
-<body>
-	<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+{% extends 'base.twig' %}
+
+{% block title %}{{ constant('APP_INFO').name }} | {{ lang('database_error') }} {% endblock %}
+
+{% block cease_head %}
+<style type="text/css">
+p {
+	margin: 12px 15px 12px 15px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
 		<h4>{{ lang('500_error_exception') }}</h4>
 		<p>Type: {{ get_class(exception) }}</p>
 		<p>Message: {{ exception.getMessage() }}</p>
@@ -27,5 +34,4 @@
 			</ul>
 		{% endif %}
 	</div>
-</body>
-</html>
+{% endblock %}
