@@ -8,5 +8,11 @@
 	"ckeditor_content_text" : "Ini adalah teks area saya untuk diganti dengan CKEditor 4.",
 	"integrated_with" : "terintegrasi dengan",
 	"page_rendered_in" : "Laman yang dirender dalam",
-	"seconds" : "detik"
+	"seconds" : "detik",
+	"404_error_heading" : "404 Halaman tidak ditemukan",
+	"404_error_message" : "Halaman yang anda minta tidak di temukan",
+	"500_error_heading" : "Kesalahan server dari dalam",
+	"500_error_exception" : "Pengecualian yang tidak tertangkap ditemukan",
+	"500_error_php" : "Terjadi kesalahan PHP",
+	"database_error" : "Kesalahan basis data"
 }
