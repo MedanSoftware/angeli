@@ -2,6 +2,11 @@
 
 Started from [Codeigniter](https://codeigniter.com) for Full-Stack Web Developer to Create Any Flexible and Complex Web Application with Best Performance and Perfect SEO.
 
+
+## Server Requirements
+
+- SQLite Extension
+
 ## Installation
 
 ### Install required packages
