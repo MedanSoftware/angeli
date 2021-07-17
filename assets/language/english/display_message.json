@@ -14,5 +14,11 @@
 	"500_error_heading" : "Internal server error",
 	"500_error_exception" : "An uncaught Exception was encountered",
 	"500_error_php" : "A PHP Error was encountered",
-	"database_error" : "Database error"
+	"database_error" : "Database error",
+	"name" : "Name",
+	"position" : "Position",
+	"office" : "Office",
+	"age" : "Age",
+	"start_date" : "Start date",
+	"salary" : "Salary"
 }

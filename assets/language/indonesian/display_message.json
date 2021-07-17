@@ -14,5 +14,11 @@
 	"500_error_heading" : "Kesalahan server dari dalam",
 	"500_error_exception" : "Pengecualian yang tidak tertangkap ditemukan",
 	"500_error_php" : "Terjadi kesalahan PHP",
-	"database_error" : "Kesalahan basis data"
+	"database_error" : "Kesalahan basis data",
+	"name" : "Nama",
+	"position" : "Posisi",
+	"office" : "Kantor",
+	"age" : "Usia",
+	"start_date" : "Tanggal Bekerja",
+	"salary" : "Gaji"
 }
