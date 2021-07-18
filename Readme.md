@@ -27,10 +27,16 @@ SetEnv CI_ENV development
 ```
 ### Activation User Module Theme
 
-```text
-{{base_url}}api/themes/activate/user/adminLTE-2
+> for the preview page, you can look at the http://{{ base_url }}/user
 
-for the preview page, you can look at the http://{{ app_url }}/user
+**RESTful API Request**
+```text
+{{ base_url }}api/themes/activate/user/adminLTE-2
+```
+
+**CLI Request**
+```bash
+php api/index.php /themes/activate/user/adminLTE-2
 ```
 
 ### Filemanager Setup
