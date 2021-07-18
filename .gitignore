@@ -7,7 +7,6 @@ application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
-application/*.db
 
 composer.lock
 application/vendor/
