@@ -21,7 +21,6 @@ class Themes extends RESTful_API
 	 * REST-API METHODS
 	 * ----------------------------------------------------------------------------------------------------
 	 */
-	
 
 	/**
 	 * Modules themes
@@ -30,17 +29,23 @@ class Themes extends RESTful_API
 	 */
 	public function index_get($module = NULL)
 	{
+		$active_themes = array();
+
 		if (!empty($module) && array_key_exists($module, $GLOBALS['modules_themes']))
 		{
 			$this->set_header(RESTful_API::HTTP_OK)->send_response('success', $GLOBALS['modules_themes'][$module]);
 		}
 		else
 		{
-			$this->set_header(RESTful_API::HTTP_OK)->send_response('success', array('active_theme' => array(), 'modules_themes' => $GLOBALS['modules_themes']));
+			foreach (array_keys($GLOBALS['modules_themes']) as $module)
+			{
+				$active_themes[$module] = active_theme($module);
+			}
+
+			$this->set_header(RESTful_API::HTTP_OK)->send_response('success', array('active_themes' => $active_themes, 'modules_themes' => $GLOBALS['modules_themes']));
 		}
 	}
 
-	
 	/**
 	 * Activate theme
 	 *
